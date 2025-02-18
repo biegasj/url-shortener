@@ -1,7 +1,8 @@
-from app.settings import Settings
-from app.shortener.views import router as shortener_router
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
+
+from app.settings import Settings
+from app.shortener.views import router as shortener_router
 
 settings = Settings()
 app = FastAPI()

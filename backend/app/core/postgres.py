@@ -1,6 +1,10 @@
-from app.settings import PostgresSettings
+from typing import Annotated
+
+from fastapi import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
+
+from app.settings import PostgresSettings
 
 settings = PostgresSettings()
 
@@ -19,3 +23,5 @@ engine = create_engine(DATABASE_URL)
 def get_db_session() -> Session:
     with Session(engine) as session:
         yield session
+
+SessionDep = Annotated[Session, Depends(get_db_session)]
