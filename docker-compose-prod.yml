@@ -1,0 +1,35 @@
+services:
+  db:
+    container_name: url_shortener_db_prod
+    image: postgres:17
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./.env
+    volumes:
+      - pgdata_prod:/var/lib/postgresql/data
+    networks:
+      - url-shortener-prod-network
+
+  backend:
+    container_name: url_shortener_backend_prod
+    image: url_shortener_backend:latest
+    restart: always
+    ports:
+      - "8000:8000"
+    build:
+      context: ./backend
+      target: prod
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    networks:
+      - url-shortener-prod-network
+
+
+volumes:
+  pgdata_prod:
+
+networks:
+  url-shortener-prod-network:

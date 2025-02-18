@@ -1,19 +1,20 @@
 services:
   db:
-    container_name: url_shortener_db
+    container_name: url_shortener_db_dev
     image: postgres:17
+    restart: unless-stopped
     ports:
       - "5432:5432"
     env_file:
       - ./.env
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata_dev:/var/lib/postgresql/data
     networks:
       - url-shortener-dev-network
 
   backend:
-    container_name: url_shortener_backend
-    image: url_shortener_backend
+    container_name: url_shortener_backend_dev
+    image: url_shortener_backend:latest
     restart: always
     ports:
       - "8000:8000"
@@ -32,7 +33,7 @@ services:
 
 
 volumes:
-  pgdata:
+  pgdata_dev:
 
 networks:
   url-shortener-dev-network:
