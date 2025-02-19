@@ -4,7 +4,7 @@ import string
 from fastapi import HTTPException, status
 from sqlmodel import select
 
-from app.models import ShortUrl
+from app.models.short_url import ShortUrl
 
 
 def generate_random_string(length: int, alphabet: str = string.ascii_lowercase + string.digits) -> str:

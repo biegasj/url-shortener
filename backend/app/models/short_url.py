@@ -1,6 +1,9 @@
 from datetime import datetime
+from typing import Optional
 
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, Relationship, SQLModel
+
+from app.models.admin_details import AdminDetails
 
 
 class ShortUrlBase(SQLModel):
@@ -10,9 +13,11 @@ class ShortUrlBase(SQLModel):
 class ShortUrl(ShortUrlBase, table=True):
     id: int = Field(primary_key=True)
     short_path: str = Field(max_length=64, unique=True, index=True, nullable=False)
-    admin_key: str = Field(max_length=128, index=True, nullable=False)
-    clicks: int = Field(default=0, nullable=False)
     created_at: datetime = Field(default_factory=lambda: datetime.now())
+
+    admin_details: Optional["AdminDetails"] = Relationship(
+        back_populates="short_url", cascade_delete=True, sa_relationship_kwargs={"uselist": False}
+    )
 
 
 class ShortUrlCreate(ShortUrlBase):
@@ -21,14 +26,9 @@ class ShortUrlCreate(ShortUrlBase):
 
 class ShortUrlUpdate(ShortUrlBase):
     short_path: str
-    clicks: int
 
 
-class ShortUrlResponse(ShortUrl):
-    short_url: str = Field(max_length=2048)
-    admin_key: str | None
-
-
-class DeleteResponse(SQLModel):
-    success: bool = Field(default=True)
-    message: str | None = Field(default=None, max_length=256, nullable=True)
+class ShortUrlResponse(ShortUrlBase):
+    short_path: str
+    short_url: str
+    admin_details: Optional[AdminDetails] = None
