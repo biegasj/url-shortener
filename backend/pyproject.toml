@@ -25,6 +25,22 @@ build-backend = "poetry.core.masonry.api"
 isort = "^6.0.0"
 ruff = "^0.9.6"
 pytest = "^8.3.4"
+pytest-env = "^1.1.5"
 
 [tool.ruff]
 line-length = 120
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
+
+[tool.pytest_env]
+POSTGRES_PASSWORD="password"
+POSTGRES_USER="user"
+POSTGRES_DB="db"
+POSTGRES_PORT=5432
+POSTGRES_URI="uri"
+
+ALLOWED_ORIGINS="http://127.0.0.1:5173"
+BASE_URL="http://localhost:8000"

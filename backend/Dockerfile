@@ -32,8 +32,8 @@ EXPOSE 8000
 
 FROM runtime AS dev
 ENTRYPOINT ["bash", "scripts/launch.sh"]
-CMD ["uvicorn", "app.__main__:app", "--port=8000", "--host=0.0.0.0", "--proxy-headers", "--reload"]
+CMD ["uvicorn", "app.main:app", "--port=8000", "--host=0.0.0.0", "--proxy-headers", "--reload"]
 
 FROM runtime AS prod
 ENTRYPOINT ["bash", "scripts/launch.sh"]
-CMD ["uvicorn", "app.__main__:app", "--port=8000", "--host=0.0.0.0", "--proxy-headers"]
+CMD ["uvicorn", "app.main:app", "--port=8000", "--host=0.0.0.0", "--proxy-headers"]
