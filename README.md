@@ -38,24 +38,6 @@ installed it already.
 pytest backend
 ```
 
-1. **Install Poetry:**
-
-Follow the official [Poetry installation guide](https://python-poetry.org/docs/#installation) if you haven't
-installed it already.
-
-2. **Clone the repository:**
-
-```bash
-git clone <repository_url>
-cd <repository_directory>
-```
-
-3. **Install dependencies:**
-
-```bash
-poetry install
-```
-
 # How to run
 
 ## Running the project
