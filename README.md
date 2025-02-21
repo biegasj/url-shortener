@@ -1,7 +1,41 @@
 # FastAPI URL Shortener
 
-A URL shortener service built with FastAPI and SQLModel that creates and manages short URLs for redirection, statistics,
-and deletion. The application uses PostgreSQL as its database.
+A web application that shortens URLs, providing redirection, statistics, and deletion capabilities.
+
+---
+
+## Technologies Used
+
+### Core Framework
+
+- **[FastAPI](https://fastapi.tiangolo.com/)**
+
+### Database & ORM
+
+- **[SQLModel](https://sqlmodel.tiangolo.com/):** Combines SQLAlchemy (ORM) and Pydantic (data validation) for Python
+  database interactions.
+
+- **[PostgreSQL](https://www.postgresql.org/)**
+
+### Infrastructure
+
+- **[Alembic](https://alembic.sqlalchemy.org/en/latest/):** Database migration tool.
+
+- **[Docker](https://docs.docker.com/)**
+
+### Other Tools
+
+- **[Poetry](https://python-poetry.org/)**
+
+- **[Pydantic](https://docs.pydantic.dev/latest/)**
+
+- **[uvicorn](https://www.uvicorn.org/)**
+
+### Testing
+
+- **[pytest](https://docs.pytest.org/en/stable/)**
+
+---
 
 # Local development
 
@@ -29,14 +63,19 @@ cd <repository_directory>
 poetry install
 ```
 
+---
+
 ## Running tests
 
 Follow the official [Poetry installation guide](https://python-poetry.org/docs/#installation) if you haven't
 installed it already.
 
 ```bash
+cd <repository_directory>
 pytest backend
 ```
+
+---
 
 # How to run
 
@@ -50,35 +89,34 @@ pytest backend
 
 `sudo docker compose -f docker-compose-prod.yml up --build`
 
-## Database
+---
 
-### Migrations
+## Database migrations
 
-- Create migration file
+### 1. Create new table
 
-If you have created **new table** make sure to import it in **backend/alembic/env.py**. This way alembic will
-include it in revision.
+If you have created a new table make sure to import it in **backend/alembic/env.py**. This way alembic will
+include it in revision, for example:
 
 `from app.models.short_url import ShortUrl`
 
-Then, create migration files.
+### 2. Create migration files
 
 `docker compose -f docker-compose-dev.yml run backend alembic revision --autogenerate -m "revision message"`
 
-For example
+For example:
 
 `docker compose -f docker-compose-dev.yml run backend alembic revision --autogenerate -m "Create ShortUrl table"`
 
-- Run migrations, it runs automatically before web server starts
+### 3. Run migrations
 
 `docker compose -f docker-compose-dev.yml run backend alembic upgrade head`
 
-- If you want to start fresh with migrations and database, run
+###   
 
-`docker system prune`
-
-and to be sure
-
-`docker volume prune`
-
-**WARNING** it deletes all images, cache and other docker stuff
+> [!NOTE]
+> If you want to start fresh with migrations and database, run
+> `docker system prune`
+> and to be sure
+> `docker volume prune`
+> Be cautious as these commands delete images, cache and other Docker-related stuff.
