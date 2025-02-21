@@ -28,6 +28,9 @@ COPY pyproject.toml poetry.lock alembic.ini ./
 
 COPY . .
 
+RUN chmod +x scripts/wait-for-it.sh && \
+    chmod +x scripts/launch.sh
+
 EXPOSE 8000
 
 FROM runtime AS dev
