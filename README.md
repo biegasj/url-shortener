@@ -115,8 +115,16 @@ For example:
 ###   
 
 > [!NOTE]
-> If you want to start fresh with migrations and database, run
-> `docker system prune`
-> and to be sure
-> `docker volume prune`
-> Be cautious as these commands delete images, cache and other Docker-related stuff.
+> To start fresh with migrations and the database, run:
+> 
+> ```bash
+> docker system prune
+> ```
+> 
+> and, to be sure, run:
+> 
+> ```bash
+> docker volume prune
+> ```
+> 
+> Be cautious, as these commands delete images, cache, and other Docker-related resources.
