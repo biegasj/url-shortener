@@ -1,5 +1,6 @@
 import secrets
 
+import validators
 from fastapi import HTTPException, status
 from fastapi.responses import RedirectResponse
 from sqlmodel import select
@@ -18,6 +19,9 @@ async def create_short_url_entry(
     session: SessionDep,
     base_url: str,
 ) -> ShortUrlResponse:
+    if not validators.url(short_url.target_url):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid target URL")
+
     existing_short_url = session.exec(select(ShortUrl).where(ShortUrl.target_url == short_url.target_url)).first()
 
     if existing_short_url:
