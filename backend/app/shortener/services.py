@@ -76,7 +76,7 @@ async def get_short_url_with_admin(
     )
 
     if not (short_url := session.exec(statement).first()):
-        raise HTTPException(status_code=404, detail="Invalid credentials")
+        raise HTTPException(status_code=404, detail="Invalid short path or secret key")
 
     return ShortUrlResponse(
         **short_url.model_dump(),
@@ -96,7 +96,7 @@ async def delete_short_url_entry(short_path: str, admin_key: str, session: Sessi
     )
 
     if not (short_url := session.exec(statement).first()):
-        raise HTTPException(status_code=404, detail="Invalid credentials")
+        raise HTTPException(status_code=404, detail="Invalid short path or secret key")
 
     session.delete(short_url)
     session.commit()
