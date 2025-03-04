@@ -7,6 +7,11 @@ from sqlmodel import select
 from app.models.short_url import ShortUrl
 
 
+def get_full_short_url(base_url: str, short_path: str) -> str:
+    """Generate the full short URL from the base URL and short path."""
+    return f"{base_url}/{short_path}"
+
+
 def generate_random_string(length: int, alphabet: str = string.ascii_lowercase + string.digits) -> str:
     """Generate a random string of the given length using the given alphabet."""
     return "".join(secrets.choice(alphabet) for _ in range(length))
