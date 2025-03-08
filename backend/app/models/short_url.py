@@ -24,10 +24,6 @@ class ShortUrlCreate(ShortUrlBase):
     short_path_length: int = Field(default=8, ge=8, le=64)
 
 
-class ShortUrlUpdate(ShortUrlBase):
-    short_path: str
-
-
 class ShortUrlResponse(ShortUrlBase):
     short_path: str
     short_url: str
