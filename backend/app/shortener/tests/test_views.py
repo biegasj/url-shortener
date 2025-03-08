@@ -5,8 +5,8 @@ from sqlmodel.pool import StaticPool
 
 from app.core.postgres import get_db_session
 from app.main import app
-from app.shortener.models import ShortUrl
 from app.shortener.models.admin_details import AdminDetails
+from app.shortener.models.short_url import ShortUrl
 
 
 @pytest.fixture(name="session")
