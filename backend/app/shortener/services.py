@@ -6,9 +6,9 @@ from fastapi.responses import RedirectResponse
 from sqlmodel import select
 
 from app.core.dependencies import SessionDep
-from app.models.admin_details import AdminDetails
-from app.models.short_url import ShortUrl, ShortUrlCreate, ShortUrlResponse
-from app.models.utils import DeleteResponse
+from app.shortener.models.admin_details import AdminDetails
+from app.shortener.models.responses import DeleteResponse
+from app.shortener.models.short_url import ShortUrl, ShortUrlCreate, ShortUrlResponse
 from app.shortener.utils import generate_unique_short_path, get_full_short_url
 
 

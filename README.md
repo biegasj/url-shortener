@@ -98,7 +98,7 @@ pytest backend
 If you have created a new table make sure to import it in **backend/alembic/env.py**. This way alembic will
 include it in revision, for example:
 
-`from app.models.short_url import ShortUrl`
+`from app.shortener.models.short_url import ShortUrl`
 
 ### 2. Create migration files
 

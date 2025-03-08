@@ -4,7 +4,7 @@ import string
 from fastapi import HTTPException, status
 from sqlmodel import select
 
-from app.models.short_url import ShortUrl
+from app.shortener.models.short_url import ShortUrl
 
 
 def get_full_short_url(base_url: str, short_path: str) -> str:

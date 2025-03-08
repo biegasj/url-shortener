@@ -3,7 +3,7 @@ from typing import Optional
 
 from sqlmodel import Field, Relationship, SQLModel
 
-from app.models.admin_details import AdminDetails
+from app.shortener.models.admin_details import AdminDetails
 
 
 class ShortUrlBase(SQLModel):

@@ -4,9 +4,9 @@ from fastapi import APIRouter, Header, Request
 from fastapi.responses import RedirectResponse
 
 from app.core.dependencies import SessionDep
-from app.models.short_url import ShortUrlCreate, ShortUrlResponse
-from app.models.utils import DeleteResponse
 from app.settings import Settings
+from app.shortener.models.responses import DeleteResponse
+from app.shortener.models.short_url import ShortUrlCreate, ShortUrlResponse
 from app.shortener.services import (
     create_short_url_entry,
     delete_short_url_entry,

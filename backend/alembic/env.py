@@ -5,8 +5,8 @@ from sqlmodel import SQLModel
 
 from alembic import context
 from app.core.postgres import DATABASE_URL
-from app.models.admin_details import AdminDetails
-from app.models.short_url import ShortUrl
+from app.shortener.models.admin_details import AdminDetails
+from app.shortener.models.short_url import ShortUrl
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
