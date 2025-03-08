@@ -55,7 +55,7 @@ async def create_short_url_entry(
 
 
 async def handle_redirect(short_path: str, session: SessionDep) -> RedirectResponse:
-    statement = select(ShortUrl, AdminDetails).join(AdminDetails).where(ShortUrl.short_path == short_path)
+    statement = select(ShortUrl).join(AdminDetails).where(ShortUrl.short_path == short_path)
 
     if not (short_url := session.exec(statement).first()):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Could not find short URL")
