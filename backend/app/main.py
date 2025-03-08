@@ -16,8 +16,10 @@ app.add_middleware(
     expose_headers=["*"],
 )
 
+
 @app.get("/health_check")
 async def health_check():
     return {"status": "ok"}
+
 
 app.include_router(shortener_router)
