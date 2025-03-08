@@ -3,7 +3,7 @@ import secrets
 import validators
 from fastapi import HTTPException, status
 from fastapi.responses import RedirectResponse
-from sqlmodel import select
+from sqlmodel import select, update
 
 from app.core.dependencies import SessionDep
 from app.shortener.models.admin_details import AdminDetails
@@ -56,12 +56,13 @@ async def create_short_url_entry(
 
 async def handle_redirect(short_path: str, session: SessionDep) -> RedirectResponse:
     statement = select(ShortUrl, AdminDetails).join(AdminDetails).where(ShortUrl.short_path == short_path)
-    short_url = session.exec(statement).scalars().first()
-    if not short_url:
+
+    if not (short_url := session.exec(statement).first()):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Could not find short URL")
 
-    short_url.admin_details.clicks += 1
-    session.add(short_url.admin_details)
+    session.exec(
+        update(AdminDetails).where(AdminDetails.id == short_url.admin_details.id).values(clicks=AdminDetails.clicks + 1)
+    )
     session.commit()
 
     return short_url.target_url
